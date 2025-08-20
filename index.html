@@ -7,140 +7,243 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-81D6829LG0');
 </script>
 
-  <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="This research introduces a novel approach integrating 3D features and depth maps alongside RGB features to enhance action recognition accuracy. Our method involves processing estimated depth maps through a separate branch from the RGB feature encoder and fusing the features to understand the scene and actions comprehensively. Using the Side4Video framework and VideoMamba, which employ CLIP and VisionMamba for spatial feature extraction, our approach outperformed our implementation of the Side4Video network on the Something-Something V2 dataset.">
-  <meta property="og:title" content="DEAR: Depth-Estimated Action Recognition"/>
-  <meta property="og:description" content="This research introduces a novel approach integrating 3D features and depth maps alongside RGB features to enhance action recognition accuracy. Our method involves processing estimated depth maps through a separate branch from the RGB feature encoder and fusing the features to understand the scene and actions comprehensively. Using the Side4Video framework and VideoMamba, which employ CLIP and VisionMamba for spatial feature extraction, our approach outperformed our implementation of the Side4Video network on the Something-Something V2 dataset."/>
-  <meta property="og:url" content="https://andrewjohngilbert.github.io/dear/"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="assets/dear_Teaser.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+<meta charset="utf-8">
+<meta name="description" content="We present MultiNeRF, a novel 3D watermarking method that enables the embedding of multiple uniquely keyed watermarks within images rendered by a single Neural Radiance Field (NeRF) model while maintaining high visual quality.">
+<meta property="og:title" content="MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields"/>
+<meta property="og:description" content="MultiNeRF enables multiple watermarks to be embedded in NeRF models via a watermark grid and FiLM-based conditional modulation, ensuring robustness and visual quality."/>
+<meta property="og:url" content="https://andrewjohngilbert.github.io/multinerf/"/>
+<meta property="og:image" content="assets/MultiNerf-teaser.png" />
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
 
+<meta name="twitter:title" content="MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields">
+<meta name="twitter:description" content="MultiNeRF: a scalable NeRF watermarking method embedding multiple keyed watermarks in 3D content.">
+<meta name="twitter:image" content="assets/MultiNerf-teaser.png">
+<meta name="twitter:card" content="summary_large_image">
 
-  <meta name="twitter:title" content="DEAR: Depth-Estimated Action Recognition">
-  <meta name="twitter:description" content="This research introduces a novel approach integrating 3D features and depth maps alongside RGB features to enhance action recognition accuracy. Our method involves processing estimated depth maps through a separate branch from the RGB feature encoder and fusing the features to understand the scene and actions comprehensively. Using the Side4Video framework and VideoMamba, which employ CLIP and VisionMamba for spatial feature extraction, our approach outperformed our implementation of the Side4Video network on the Something-Something V2 dataset">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="asserts/dear_Teaser.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="Machine Learning, Depth, Video Understanding,andrew Gilbert, Sadegh Rahmani,">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="Machine Learning, NeRF, Watermarking, Privacy, Andrew Gilbert, Yash Kulthe, John Collomosse, ICCV 2025, GenAI Watermarking">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<title>MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields</title>
+<link rel="icon" type="image/x-icon" href="static/images/favicon-32x32.png">
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
-  <title>DEAR: Depth-Estimated Action Recognition</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon-32x32.png">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
+<link rel="stylesheet" href="static/css/bulma.min.css">
+<link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="static/css/index.css">
 
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+<script defer src="static/js/fontawesome.all.min.js"></script>
+<script src="static/js/bulma-carousel.min.js"></script>
+<script src="static/js/bulma-slider.min.js"></script>
+<script src="static/js/index.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+<!-- JSON-LD: Scholarly Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "@id": "https://andrewjohngilbert.github.io/multinerf/#article",
+  "url": "https://andrewjohngilbert.github.io/multinerf/",
+  "name": "MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields",
+  "headline": "MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields",
+  "inLanguage": "en",
+  "description": "We present MultiNeRF, a novel 3D watermarking method that enables the embedding of multiple uniquely keyed watermarks within images rendered by a single Neural Radiance Field (NeRF) model while maintaining high visual quality.",
+  "image": "https://andrewjohngilbert.github.io/multinerf/assets/MultiNerf-teaser.png",
+  "keywords": [
+    "Machine Learning",
+    "NeRF",
+    "Watermarking",
+    "Privacy",
+    "ICCV 2025",
+    "Generative AI",
+    "3D Vision"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Yash Kulthe",
+      "affiliation": { "@type": "Organization", "name": "University of Surrey" },
+      "sameAs": ["https://www.linkedin.com/in/yash-kulthe/"]
+    },
+    {
+      "@type": "Person",
+      "name": "Andrew Gilbert",
+      "affiliation": { "@type": "Organization", "name": "University of Surrey" },
+      "sameAs": ["https://andrewjohngilbert.github.io/"]
+    },
+    {
+      "@type": "Person",
+      "name": "John Collomosse",
+      "affiliation": [
+        { "@type": "Organization", "name": "University of Surrey" },
+        { "@type": "Organization", "name": "Adobe Research" }
+      ],
+      "sameAs": ["http://personal.ee.surrey.ac.uk/Personal/J.Collomosse/"]
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "International Confernce on Computer Vision  (ICCV'25) - The 1st Workshop on Authenticity & Provenance in the age of Generative AI (APAI'25)"
+  },
+  "isPartOf": {
+    "@type": "PublicationEvent",
+    "name": "ICCV'25 - The 1st Workshop on Authenticity & Provenance in the age of Generative AI (APAI'25)",
+    "startDate": "2025"
+  },
+  "datePublished": "2025",
+  "encoding": [
+    {
+      "@type": "MediaObject",
+      "name": "Paper PDF",
+      "fileFormat": "application/pdf",
+      "contentUrl": "https://andrewjohngilbert.github.io/multinerf/assets/MultiNerf-Paper.pdf"
+    },
+    {
+      "@type": "MediaObject",
+      "name": "Poster PDF",
+      "fileFormat": "application/pdf",
+      "contentUrl": "https://andrewjohngilbert.github.io/multinerf/assets/MultiNerf-Posterv1.pdf"
+    }
+  ]
+}
+</script>
+
+<!-- JSON-LD: Website -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://andrewjohngilbert.github.io/multinerf/#website",
+  "url": "https://andrewjohngilbert.github.io/multinerf/",
+  "name": "MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields",
+  "description": "Project page for MultiNeRF, a method for embedding multiple watermarks into NeRF models while preserving rendering quality. Includes abstract, teaser figures, poster, and paper links.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "University of Surrey",
+    "url": "https://www.surrey.ac.uk/"
+  },
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "Yash Kulthe",
+      "sameAs": "https://www.linkedin.com/in/yash-kulthe/"
+    },
+    {
+      "@type": "Person",
+      "name": "Andrew Gilbert",
+      "sameAs": "https://andrewjohngilbert.github.io/"
+    },
+    {
+      "@type": "Person",
+      "name": "John Collomosse",
+      "sameAs": "http://personal.ee.surrey.ac.uk/Personal/J.Collomosse/"
+    }
+  ],
+  "inLanguage": "en",
+  "image": "https://andrewjohngilbert.github.io/multinerf/assets/MultiNerf-teaser.png",
+  "mainEntity": {
+    "@id": "https://andrewjohngilbert.github.io/multinerf/#article"
+  }
+}
+</script>
+
+<!-- JSON-LD: WebPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://andrewjohngilbert.github.io/multinerf/#webpage",
+  "url": "https://andrewjohngilbert.github.io/multinerf/",
+  "name": "MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields",
+  "description": "Official project page for MultiNeRF — includes abstract, teaser figures, experimental results, BibTeX citation, poster, and PDF of the paper presented at the ICCV'25 Workshop on Authenticity & Provenance in the age of Generative AI (APAI'25).",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@id": "https://andrewjohngilbert.github.io/multinerf/#website"
+  },
+  "mainEntity": {
+    "@id": "https://andrewjohngilbert.github.io/multinerf/#article"
+  },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://andrewjohngilbert.github.io/multinerf/assets/MultiNerf-teaser.png",
+    "width": 1200,
+    "height": 630
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "University of Surrey",
+    "url": "https://www.surrey.ac.uk/"
+  }
+}
+</script>
 </head>
+
 <body>
 
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://www.linkedin.com/in/yash-kulthe/" target="_blank">Yash Kulthe</a><sup>[1]</sup>,</span>
+            <span class="author-block"><a href="https://andrewjohngilbert.github.io/" target="_blank">Andrew Gilbert</a><sup>[1]</sup>,</span>
+            <span class="author-block"><a href="http://personal.ee.surrey.ac.uk/Personal/J.Collomosse/" target="_blank">John Collomosse</a><sup>[1,2]</sup></span>
+          </div>
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              University of Surrey<sup>[1]</sup>, Adobe Research<sup>[2]</sup><br>
+              <a href="https://iccv.thecvf.com/" target="_blank">International Confernce on Computer Vision  (ICCV'25) - </a><br>
+              <a href="https://sites.google.com/berkeley.edu/apai-iccv2025/home" target="_blank">The 1st Workshop on Authenticity & Provenance in the age of Generative AI (APAI'25)</a>
+            </span>
+          </div>
+
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">DEAR: Depth-Estimated Action Recognition</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-                <a href="https://www.linkedin.com/in/sadegh-rahmani" target="_blank">Sadegh Rahmani</a>[1]<sup></sup>,</span>
-                <span class="author-block">
-                  <a href="F" target="_blank">Filip Rybansky</a>[2]<sup></sup>,</span>
-                  <span class="author-block">
-                    <a href="https://www.ncl.ac.uk/medical-sciences/people/profile/quocvuong.html" target="_blank">Quoc Vuong</a>[2]<sup></sup>,</span>
-                <span class="author-block">
-                  <a href="https://www.surrey.ac.uk/people/frank-guerin" target="_blank">Frank Guerin</a>[1]<sup></sup>,</span>
-                  <span class="author-block">
-                    <a href="https://andrewjohngilbert.github.io/" target="_blank">Andrew Gilbert</a>[1]<sup></sup>,</span>
-                  </div>
-
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">[1] Unviersity of Surrey [2] Unviersityof Newcastle<br> <a href="https://eccv2024.ecva.net/" target="_blank">The European Conference of Computer Vision 2024</a> <a href="https://sites.google.com/view/hcvworkshop2024" target="_blank">Human-inspired Computer Vision Workshop</a>              
-                  </div>
-
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- Arxiv PDF link -->
-                      <span class="link-block">
-                        <a href="https://andrewjohngilbert.github.io/dear/assets/dear_paper.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- Supplementary PDF link -->
-                   <span class="link-block">
-                      <a href="assets/DEAR HCV Poster.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Poster</span>
-                    </a>
-                  </span>
- 
-                  <!-- Github link -->
-                <span class="link-block">
-                    <a href="https://github.com/SadeghRahmaniB/DEAR" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-              
-
-                
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="assets/MultiNerf-Paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="assets/MultiNerf-Posterv1.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Poster</span>
+                </a>
+              </span>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- Teaser video-->
+<!-- Teaser -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="assets/dear_teaser.jpg">
+      <img src="assets/MultiNerf-teaser.png" alt="MultiNeRF Teaser">
       <h2 class="subtitle has-text-centered">
-        We perform supervised action recognition using a fusion of RGB and depth map frames. We used S4V network for processing RGB and the same network plus VideoMamba to extract depth features. Gated cross-attention (GCA) has been used for fusing modalities, while mean operation has been selected for fusing models' scores.
+        MultiNeRF embeds multiple watermarks in NeRF (TensoRF) at training time. Watermarks are keyed by unique IDs at rendering time, allowing independent watermark activation.
       </h2>
     </div>
   </div>
 </section>
-<!-- End teaser video -->
 
-<!-- Paper abstract -->
+<!-- Abstract -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -148,71 +251,69 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Detecting actions in videos, particularly within cluttered scenes, poses significant challenges due to the limitations of 2D frame analysis from a camera perspective. Unlike human vision, which benefits from 3D understanding, recognizing actions in such environments can be difficult. This research introduces a novel approach integrating 3D features and depth maps alongside RGB features to enhance action recognition accuracy. Our method involves processing estimated depth maps through a separate branch from the RGB feature encoder and fusing the features to understand the scene and actions comprehensively. Using the Side4Video framework and VideoMamba, which employ CLIP and VisionMamba for spatial feature extraction, our approach outperformed our implementation of the Side4Video network on the Something-Something V2 dataset.
+            We present MultiNeRF, a novel 3D watermarking method that enables embedding multiple uniquely keyed watermarks within images rendered by a single Neural Radiance Field (NeRF) model while maintaining high visual quality. Our approach extends TensoRF by incorporating a dedicated watermark grid alongside geometry and appearance grids, ensuring higher watermark capacity without entanglement with scene content. We propose a FiLM-based conditional modulation mechanism that dynamically activates watermarks based on input identifiers, allowing multiple independent watermarks to be embedded and extracted without retraining. Experiments on NeRF-Synthetic and LLFF demonstrate improved robustness and watermark capacity while preserving rendering quality. MultiNeRF generalizes prior single-watermark methods, providing a scalable solution for securing ownership and attribution in 3D content.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End paper abstract -->
 
+<!-- Figures -->
+<section class="hero teaser"><div class="container is-max-desktop"><div class="hero-body">
+  <img src="assets/MultiNerf-fullmethod.png">
+  <h2 class="subtitle has-text-centered">MultiNeRF training pipeline: encoder, watermark embeddings, differentiable noise, perceptual + patch losses.</h2>
+</div></div></section>
 
+<section class="hero teaser"><div class="container is-max-desktop"><div class="hero-body">
+  <img src="assets/MultiNerf-tableSingleWM.jpg">
+  <h2 class="subtitle has-text-centered">Performance comparison for single watermark embedding.</h2>
+</div></div></section>
 
-<!-- Paper poster -->
+<section class="hero teaser"><div class="container is-max-desktop"><div class="hero-body">
+  <img src="assets/MultiNerf-bitAcc.png">
+  <h2 class="subtitle has-text-centered">Bit accuracy across SYN and LLFF datasets for multiple watermark IDs.</h2>
+</div></div></section>
 
-  <section class="hero is-small is-light">
+<!-- Poster -->
+ <!--
+<section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
       <h2 class="title">Poster</h2>
-
-      <iframe  src="assets/DEAR HCV Poster.pdf" width="100%" height="1000">
-          </iframe>
-        
-      </div>
+      <iframe src="assets/MultiNerf-Posterv1.pdf" width="100%" height="1000"></iframe>
     </div>
-  </section>
-<!--End paper poster -->
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@inproceedings{Rahmani:Dear:ECCVWS:2024,
-        AUTHOR = Rahmani, Sadegh and Rybansky, Filip and Vuong, Quoc and Guerin, Frank and Gilbert, Andrew ",
-        TITLE = "DEAR: Depth-Estimated Action Recognition",
-        BOOKTITLE = " The European Conference of Computer Vision 2024, Human-inspired Computer Vision Workshop",
-        YEAR = "2024",
-        }</code></pre>
-    </div>
+  </div>
 </section>
-<!--End BibTex citation -->
+-->
 
+<!-- BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+<pre><code>@inproceedings{Kulthe:MultiNeRF:ICCVWS:2025,
+  author = {Yash Kulthe and Andrew Gilbert and John Collomosse},
+  title = {MultiNeRF: Multiple Watermark Embedding for Neural Radiance Fields},
+  booktitle = {International Conference on Computer Vision (ICCV'25) - The 1st Workshop on Authenticity & Provenance in the age of Generative AI (APAI'25)},
+  year = {2025}
+}</code></pre>
+  </div>
+</section>
 
-  <footer class="footer">
+<footer class="footer">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
-
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>, adapted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.<br>
+            Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
           </p>
-
         </div>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>
